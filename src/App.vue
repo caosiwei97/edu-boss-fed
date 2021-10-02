@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <h1 @click="getMsg">{{ msg }}</h1>
+    <h1 class="header">{{ msg }}</h1>
+    <el-button @click="getMsg">Click</el-button>
     <router-view />
   </div>
 </template>
@@ -18,3 +19,9 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .header {
+    color: $success-color;
+  }
+</style>
