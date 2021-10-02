@@ -9,6 +9,7 @@
 <script lang="ts">
   import Vue from 'vue'
   import Component from 'vue-class-component'
+  import request from '@/utils/request'
 
   @Component
   export default class App extends Vue {
@@ -16,6 +17,11 @@
 
     getMsg(): void {
       console.log(this.msg)
+    }
+
+    async mounted() {
+      const res = await request.get('/login')
+      console.log(res)
     }
   }
 </script>
