@@ -1,3 +1,4 @@
+import store from '@/store'
 import axios, {
   AxiosRequestConfig,
   AxiosInstance,
@@ -15,11 +16,7 @@ class HttpRequest {
     this.timeout = 10 * 1000
   }
 
-  get(
-    url: string,
-    params?: any,
-    config?: AxiosRequestConfig,
-  ): AxiosPromise<never> {
+  get(url: string, params?: any, config?: AxiosRequestConfig): AxiosPromise {
     return this._createAxiosInstance({
       url,
       method: 'get',
@@ -28,11 +25,7 @@ class HttpRequest {
     })
   }
 
-  post(
-    url: string,
-    data?: any,
-    config?: AxiosRequestConfig,
-  ): AxiosPromise<never> {
+  post(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise {
     return this._createAxiosInstance({
       url,
       method: 'post',
@@ -48,7 +41,7 @@ class HttpRequest {
     }
   }
 
-  _createAxiosInstance(options: AxiosRequestConfig): AxiosPromise<never> {
+  _createAxiosInstance(options: AxiosRequestConfig): AxiosPromise {
     const instance = axios.create()
     this.configInterceptors(instance)
     return instance({
@@ -61,7 +54,10 @@ class HttpRequest {
     // 添加请求拦截器
     instance.interceptors.request.use(
       (config) => {
-        // 在发送请求之前做些什么
+        const user = store.state.user
+        if (user?.access_token) {
+          config.headers!.Authorization = user.access_token
+        }
         return config
       },
       (error: AxiosError) => {
@@ -74,8 +70,14 @@ class HttpRequest {
     instance.interceptors.response.use(
       (res) => {
         // 对响应数据做点什么
-        if (res.status === 200) return Promise.resolve(res.data)
-        return Promise.reject(res)
+        if (
+          res.status === 200 &&
+          (res.data['state'] === 1 || res.data['success'])
+        ) {
+          return Promise.resolve(res.data)
+        }
+
+        return Promise.reject(res.data)
       },
       (error: AxiosError) => {
         // 对响应错误做点什么
