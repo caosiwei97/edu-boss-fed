@@ -81,7 +81,7 @@ class HttpRequest {
       },
       (error: AxiosError) => {
         // 对响应错误做点什么
-        return errorHandle(error)
+        return errorHandle(error, instance)
       },
     )
   }
