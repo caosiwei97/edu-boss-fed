@@ -58,6 +58,23 @@ const routes: Array<RouteConfig> = [
           import(/* webpackChunkName: 'menu' */ '@/views/menu/index.vue'),
       },
       {
+        name: 'menu-create',
+        path: '/menu/create',
+        component: () =>
+          import(
+            /* webpackChunkName: 'menu-create_or_edit' */ '@/views/menu/MenuCreate.vue'
+          ),
+      },
+      {
+        name: 'menu-edit',
+        path: '/menu/:id/edit',
+        component: () =>
+          import(
+            /* webpackChunkName: 'menu-create_or_edit' */ '@/views/menu/MenuEdit.vue'
+          ),
+        props: true,
+      },
+      {
         name: 'role',
         path: '/role',
         component: () =>

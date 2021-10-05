@@ -25,6 +25,15 @@ class HttpRequest {
     })
   }
 
+  delete(url: string, params?: any, config?: AxiosRequestConfig): AxiosPromise {
+    return this._createAxiosInstance({
+      url,
+      method: 'delete',
+      params,
+      ...config,
+    })
+  }
+
   post(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise {
     return this._createAxiosInstance({
       url,
@@ -72,7 +81,9 @@ class HttpRequest {
         // 对响应数据做点什么
         if (
           res.status === 200 &&
-          (res.data['state'] === 1 || res.data['success'])
+          (res.data['state'] === 1 ||
+            res.data['success'] ||
+            res.data['code'] === '000000')
         ) {
           return Promise.resolve(res.data)
         }
