@@ -30,6 +30,7 @@
           <div>
             <el-button
               type="text"
+              size="mini"
               @click="
                 $router.push({
                   name: 'alloc-menu',
@@ -42,6 +43,7 @@
             >
             <el-button
               type="text"
+              size="mini"
               @click="
                 $router.push({
                   name: 'alloc-resource',
@@ -54,7 +56,7 @@
             >
           </div>
           <div>
-            <el-button type="text" @click="handleEdit(scope.row)"
+            <el-button type="text" size="mini" @click="handleEdit(scope.row)"
               >编辑</el-button
             >
             <el-button
