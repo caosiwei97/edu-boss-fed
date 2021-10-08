@@ -90,6 +90,15 @@ const routes: Array<RouteConfig> = [
         props: true,
       },
       {
+        name: 'alloc-resource',
+        path: '/role/:roleId/alloc-resource',
+        component: () =>
+          import(
+            /* webpackChunkName: 'alloc-resource' */ '@/views/role/AllocResource.vue'
+          ),
+        props: true,
+      },
+      {
         name: 'user',
         path: '/user',
         component: () =>

@@ -1,10 +1,10 @@
 <template>
-  <div class="alloc-menu">
+  <div class="alloc-resource">
     <el-card class="box-card">
-      <div slot="header">分配菜单</div>
+      <div slot="header">分配资源</div>
       <el-tree
-        ref="menu"
-        :data="menus"
+        ref="resource"
+        :data="resources"
         :props="props"
         show-checkbox
         node-key="id"
@@ -21,45 +21,40 @@
 </template>
 
 <script lang="ts">
-  import { allocateMenus, getAllMenuNodes, getRoleMenus } from '@/api/menu'
+  import { getRoleResources, allocateResources } from '@/api/resource'
   import { Tree } from 'element-ui'
   import { Component, Prop, Vue } from 'vue-property-decorator'
 
   @Component
-  export default class AllocMenu extends Vue {
+  export default class AllocResource extends Vue {
     @Prop({ type: [String, Number], default: '' })
     readonly roleId!: string | number
 
-    menus = []
+    resources = []
     defaultCheckedKeys = []
 
     props = {
       label: 'name',
-      children: 'subMenuList',
+      children: 'resourceList',
     }
 
     created() {
-      this.loadAllMenus()
-      this.loadRoleMenus()
+      this.loadResources()
     }
 
-    async loadAllMenus() {
-      const res = await getAllMenuNodes()
-      this.menus = res.data
+    async loadResources() {
+      const res = await getRoleResources(this.roleId)
+      this.resources = res.data
+      this.getCheckedKeys(this.resources)
     }
 
-    async loadRoleMenus() {
-      const res = await getRoleMenus(this.roleId)
-      this.getCheckedKeys(res.data)
-    }
-
-    getCheckedKeys(menus: Array<any>) {
-      menus
+    getCheckedKeys(resources: Array<any>) {
+      resources
         .filter((item) => item.selected)
         .forEach((item) => {
           this.defaultCheckedKeys = [...this.defaultCheckedKeys, item.id] as any
-          if (item.subMenuList) {
-            this.getCheckedKeys(item.subMenuList)
+          if (item.resourceList) {
+            this.getCheckedKeys(item.resourceList)
           }
         })
     }
@@ -67,10 +62,10 @@
     async onSave() {
       // 拿到所有选中的 key
       try {
-        const keys = (this.$refs.menu as Tree).getCheckedKeys()
-        await allocateMenus({
+        const keys = (this.$refs.resource as Tree).getCheckedKeys()
+        await allocateResources({
           roleId: this.roleId,
-          menuIdList: keys,
+          resourceIdList: keys,
         })
         this.$message.success('保存成功')
         this.$router.back()
@@ -82,7 +77,7 @@
     }
 
     clearKeys() {
-      ;(this.$refs.menu as Tree).setCheckedKeys([])
+      ;(this.$refs.resource as Tree).setCheckedKeys([])
     }
   }
 </script>

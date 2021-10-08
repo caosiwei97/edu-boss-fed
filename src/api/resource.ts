@@ -55,3 +55,21 @@ export const deleteResource = (id: number) => request.delete(`/resource/${id}`)
  */
 export const saveOrUpdateResource = (data: Resource) =>
   request.post('/resource/saveOrUpdate', data)
+
+/**
+ * 获取角色拥有的资源列表
+ * @param roleId
+ * @returns
+ */
+export const getRoleResources = (roleId: string | number) =>
+  request.get('/resource/getRoleResources', { roleId })
+
+/**
+ * 给角色分配资源
+ * @param data
+ * @returns
+ */
+export const allocateResources = (data: {
+  roleId: number | string
+  resourceIdList: Array<number | string>
+}) => request.post('/resource/allocateRoleResources', data)
