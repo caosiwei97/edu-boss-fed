@@ -58,6 +58,9 @@ async function errorHandle(
           })
         }
         break
+      case 403:
+        Message.error('服务器拒绝了您的操作，请联系管理员！')
+        break
       // 请求的资源不存在
       case 404:
         // 处理404

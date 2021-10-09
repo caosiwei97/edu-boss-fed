@@ -41,3 +41,26 @@ export const createOrEditRole = (role: Role) =>
  * @returns
  */
 export const deleteRole = (id: string | number) => request.delete(`/role/${id}`)
+
+/**
+ * 获取所有角色
+ * @returns
+ */
+export const getAllRoles = () => request.get('/role/all')
+
+/**
+ * 查询用户角色
+ * @returns
+ */
+export const getUserRole = (userId: string | number) =>
+  request.get(`/role/user/${userId}`)
+
+/**
+ * 给用户分配角色
+ * @param data
+ * @returns
+ */
+export const allocateUserRoles = (data: {
+  userId: string | number
+  roleIdList: Array<number | string>
+}) => request.post('/role/allocateUserRoles', data)
