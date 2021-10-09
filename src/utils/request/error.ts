@@ -1,4 +1,4 @@
-import { getRefreshToken } from '@/api/login'
+import { getRefreshToken } from '@/api/user'
 import router from '@/router'
 import store from '@/store'
 import { AxiosError, AxiosInstance } from 'axios'

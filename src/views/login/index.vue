@@ -36,7 +36,7 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
   import { ElForm } from 'element-ui/types/form'
-  import { login } from '@/api/login'
+  import { login } from '@/api/user'
 
   interface LoginResponse {
     success: boolean

@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-  import { getUserInfo } from '@/api/login'
+  import { getUserInfo } from '@/api/user'
   import { Component, Vue } from 'vue-property-decorator'
 
   @Component
