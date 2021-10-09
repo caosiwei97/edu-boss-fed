@@ -101,7 +101,7 @@
     users = []
     filterParams = {
       currentPage: 1,
-      pageSize: 100,
+      pageSize: 10,
       phone: '',
       startCreateTime: '',
       endCreateTime: '',
@@ -186,4 +186,9 @@
   }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .pagination {
+    margin: 20px auto;
+    text-align: center;
+  }
+</style>
