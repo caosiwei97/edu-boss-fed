@@ -50,8 +50,11 @@
 
 <style scoped lang="scss">
   .el-aside {
+    position: sticky;
+    top: 0;
+    max-height: 100vh;
     .el-menu {
-      min-height: 100vh;
+      height: 100%;
     }
   }
 </style>
