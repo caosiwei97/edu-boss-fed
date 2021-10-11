@@ -1,11 +1,18 @@
 <template>
-  <div> cource </div>
+  <div>
+    <course-list></course-list>
+  </div>
 </template>
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
+  import CourseList from './components/List.vue'
 
-  @Component
+  @Component({
+    components: {
+      CourseList,
+    },
+  })
   export default class Course extends Vue {}
 </script>
 
