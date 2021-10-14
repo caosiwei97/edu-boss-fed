@@ -38,8 +38,16 @@ export const saveOrUpdateCourse = (data: any) =>
  */
 export const uploadImg = (
   data: FormData,
-  onUploadProgress: (e: ProgressEvent) => void,
+  onUploadProgress?: (e: ProgressEvent) => void,
 ) =>
   request.post('/course/upload', data, {
     onUploadProgress,
   })
+
+/**
+ * 通过课程Id获取课程信息
+ * @param id
+ * @returns
+ */
+export const getCourseById = (id: string | number) =>
+  request.get('/course/getCourseById', { courseId: id })

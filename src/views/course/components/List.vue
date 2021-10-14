@@ -48,7 +48,14 @@
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button @click="handleSelectRole(scope.row)" size="small"
+            <el-button
+              @click="
+                $router.push({
+                  name: 'course-edit',
+                  params: { courseId: scope.row.id },
+                })
+              "
+              size="small"
               >编辑</el-button
             >
             <el-button @click="handleSelectRole(scope.row)" size="small"
@@ -139,28 +146,6 @@
       ;(this.$refs['filter-form'] as Form).resetFields()
       this.loadCourses()
     }
-
-    // async handleSelectRole(role: any) {
-    //   const [allRoles, userRoles] = await Promise.all([
-    //     getAllRoles(),
-    //     getUserRole(role.id),
-    //   ])
-    //   this.dialogVisible = true
-    //   this.roles = allRoles.data
-    //   this.currentUser = role
-    //   this.roleIdList = (userRoles.data as any).map(
-    //     (item: { id: any }) => item.id,
-    //   )
-    // }
-
-    // async handleAllocRole() {
-    //   await allocateUserRoles({
-    //     userId: (this.currentUser as any).id,
-    //     roleIdList: this.roleIdList,
-    //   })
-    //   this.$message.success('操作成功')
-    //   this.dialogVisible = false
-    // }
   }
 </script>
 
