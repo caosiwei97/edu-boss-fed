@@ -4,7 +4,7 @@
 
 <script lang="ts">
   import { uploadImg } from '@/api/course'
-  import { Component, Prop, Vue } from 'vue-property-decorator'
+  import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
   import E from 'wangeditor'
 
   @Component
@@ -12,18 +12,23 @@
     @Prop({ type: String, default: '' })
     readonly value!: string
 
-    mounted() {
-      console.log(this.value)
+    @Watch('value')
+    onValueChanged(val: string) {
+      this.editor && this.editor.txt.html(val)
+    }
 
+    editor: E | null = null
+
+    mounted() {
       this.initEditor()
     }
 
     initEditor() {
-      const editor = new E(this.$refs.editor as HTMLElement)
-      editor.config.onchange = (newHtml: string) => {
+      this.editor = new E(this.$refs.editor as HTMLElement)
+      this.editor.config.onchange = (newHtml: string) => {
         this.$emit('input', newHtml)
       }
-      editor.config.customUploadImg = async function (
+      this.editor.config.customUploadImg = async function (
         resultFiles: Array<File>,
         insertImgFn: any,
       ) {
@@ -36,9 +41,9 @@
           console.log(error)
         }
       }
-      editor.create()
+      this.editor.create()
       // 设置初始内容
-      editor.txt.html(this.value)
+      this.editor.txt.html(this.value)
     }
   }
 </script>

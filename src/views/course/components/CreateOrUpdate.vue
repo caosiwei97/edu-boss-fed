@@ -215,8 +215,10 @@
       autoOnlineTime: '',
     }
 
-    mounted() {
-      if (this.courseId) {
+    created() {
+      console.log('parent')
+
+      if (this.isEdit) {
         this.loadCourseById(this.courseId)
       }
     }
