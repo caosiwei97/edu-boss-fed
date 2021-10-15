@@ -2,7 +2,7 @@
 FROM node:lts-alpine as build-stage
 WORKDIR /app
 COPY package.json .
-RUN npm i --registry=https://registry.npm.taobao.org && yarn test
+RUN npm i --registry=https://registry.npm.taobao.org && npm run build
 COPY . .
 # production stage
 FROM nginx:stable-alpine as production-stage
