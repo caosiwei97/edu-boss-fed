@@ -50,9 +50,13 @@
     isLoading = false
 
     form = {
-      phone: '18201288771',
-      password: '111111',
+      phone: '',
+      password: '',
     }
+    // form = {
+    //   phone: '18201288771',
+    //   password: '111111',
+    // }
 
     rules = {
       phone: [
