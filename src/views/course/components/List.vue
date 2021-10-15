@@ -58,7 +58,14 @@
               size="small"
               >编辑</el-button
             >
-            <el-button @click="handleSelectRole(scope.row)" size="small"
+            <el-button
+              @click="
+                $router.push({
+                  name: 'course-section',
+                  params: { courseId: scope.row.id },
+                })
+              "
+              size="small"
               >内容管理</el-button
             >
           </template>
