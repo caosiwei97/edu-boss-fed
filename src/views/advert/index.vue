@@ -1,5 +1,5 @@
 <template>
-  <div> ad </div>
+  <div> 程序员小哥快马加鞭开发中... </div>
 </template>
 
 <script lang="ts">
